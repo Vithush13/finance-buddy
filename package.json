@@ -1,0 +1,14 @@
+{
+  "name": "finance-buddy",
+  "version": "1.0.0",
+  "description": "Personal Finance Buddy – A MERN stack app for tracking expenses with AI-powered categorization, savings challenges, and group leaderboards.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Vithush",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
