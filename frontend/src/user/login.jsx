@@ -6,7 +6,7 @@ import { validateEmail } from "../utils/helper";
 
 export default function Login() {
     const[email,setEmail] = useState("");
-    const[error,setError] = useState("null");
+    const[error,setError] = useState(null);
     const[password,setPassword] = useState("");
     
     const navigate = useNavigate();
@@ -26,9 +26,9 @@ export default function Login() {
   return (
     <AuthLayout>
         <div className="lg:w-[70%] h-3/4 md:h-full flex flex-col justify-center">
-        <h3 className="text-xl front-semibold text-black"> Welcome Back!</h3>
-        <p className="text-xs text-slate-700 mt-[5px] mb-6">
-            please enter your details to Login
+        <h3 className="text-2xl front-semibold text-black"> Welcome Back!</h3>
+        <p className="text-lg text-slate-700 mt-[5px] mb-6">
+            Please enter your details to Login
         </p>
         <form onSubmit={handleLogin}>
             <Input 
@@ -51,7 +51,7 @@ export default function Login() {
 
              <p className="text-[13px] text-slate-800 mt-3">
               Don't have an Account? {" "}
-              <Link className="font-medium text-primary underline" to="/signup"> SignUp</Link>
+              <Link className="font-medium text-primary underline text-blue-500" to="/signup"> SignUp</Link>
              </p>
         </form>
 
