@@ -7,6 +7,7 @@ import connectDatabase from "./config/database.js";
 import authRoutes from "./routes/authRoutes.js";
 import incomeRoutes from "./routes/incomeRoutes.js";
 import expenseRoutes from "./routes/expenseRoutes.js";
+import dashboardRoutes from "./routes/dashboardRoutes.js"
 
 dotenv.config({ path: "./src/config/.env" });  // load correct .env path
 
@@ -31,6 +32,7 @@ connectDatabase();
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/income", incomeRoutes);
 app.use("/api/v1/expense", expenseRoutes);
+app.use("/api/v1/dashboard", dashboardRoutes);
 
 app.use('/uploads',express.static(path.join(__dirname,"uploads")));
 app.get("/", (req, res) => {
