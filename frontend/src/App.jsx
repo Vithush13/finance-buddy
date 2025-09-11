@@ -6,12 +6,13 @@ import Challenges from "./pages/challenges";
 import Friends from "./pages/friends";
 import Login from "./user/login";
 import SignUp from "./user/signup"
+import UserProvider from "./context/userContext";
 
 export default function App() {
   return (
-    <Router>
+    <UserProvider>
       <div>
-       
+    <Router>
           <Routes>
             <Route path="/" element={<Root />} />
              <Route path="/dashboard" element={<Dashboard />} />
@@ -21,9 +22,9 @@ export default function App() {
             <Route path="/challenges" element={<Challenges />} />
             <Route path="/friends" element={<Friends />} />
           </Routes>
-       
-      </div>
     </Router>
+    </div>
+  </UserProvider>
   );
 };
 

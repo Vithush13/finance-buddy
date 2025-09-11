@@ -1,6 +1,5 @@
 import User from "../models/user.js";
 import jwt from "jsonwebtoken";
-
 // Generate JWT token
 const generateToken = (id) => {
     return jwt.sign(
@@ -11,14 +10,14 @@ const generateToken = (id) => {
 };
 
 export const registerUser = async (req,res) => {
-    const {name,emil,password, profileImageUrl} = req.body;
+ const { name, email, password, profileImageUrl } = req.body;
 
     if(!name || !email || !password){
         return res.status(400).json({ message:"All fileds are required"});
     }
 
     try{
-        const existingUser = await User.findOne({emil});
+        const existingUser = await User.findOne({email});
         if(existingUser){
             return res.status(400).json({message:"Email already in use"});
         }
@@ -33,7 +32,7 @@ export const registerUser = async (req,res) => {
             token: generateToken(user._id),
         });
     } catch (err){
-        res.status(500).json({mesage:"Error registering user", error:err.mesage});
+        res.status(500).json({mesage:"Error registering user", error:err.message});
     }
 };
 
