@@ -1,4 +1,4 @@
-import{LuLayoutDashboard,LuHandCoins,LuWalletMinimal, LuLogOut} from"react-icons/lu";
+import{LuTrophy, LuUsers,LuLayoutDashboard,LuHandCoins,LuWalletMinimal, LuLogOut} from"react-icons/lu";
 
 export const SIDE_MENU_DATA =[
     {
@@ -21,6 +21,18 @@ export const SIDE_MENU_DATA =[
     },
     {
         id:"04",
+        label:"Challenges",
+        icon:LuTrophy,
+        path:"/challenges"
+    },
+    {
+        id:"05",
+        label:"Friends",
+        icon:LuUsers,
+        path:"/friends"
+    },
+    {
+        id:"06",
         label:"Logout",
         icon:LuLogOut,
         path:"logout"

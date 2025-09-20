@@ -1,10 +1,14 @@
 
+import DashboardLayout from "../components/layouts/dashboardLayout";
+
 
 export default function Expenses() {
+  
+
   return (
-    <div>
-      <h2 className="text-2xl font-bold mb-4">Track Expenses</h2>
-      
-    </div>
+    <DashboardLayout activeMenu="Expense">
+       <h5>Expense</h5>
+     
+    </DashboardLayout>
   );
 }

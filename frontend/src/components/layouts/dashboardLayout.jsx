@@ -11,7 +11,7 @@ export default function DashboardLayout ({children, activeMenu}) {
             
             {user && (
                 <div className="flex" >
-                    <div className="mx-[1080px]">
+                    <div className="mx-[1080px]:hidden">
                        <SideMenu activeMenu={activeMenu} />
                     </div>
 
