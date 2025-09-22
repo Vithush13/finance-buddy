@@ -10,6 +10,11 @@ import { LuHandCoins, LuWalletMinimal } from "react-icons/lu";
 import { addThousandsSeparator } from "../utils/helper";
 import RecentTranaction from "../components/dashboard/recentTransaction";
 import FinanceOverview from "../components/dashboard/financeOverview";
+import ExpenseTransactions from "../components/dashboard/expenseTransaction";
+import Last30DaysExpenses from "../components/dashboard/last30DaysExpenses";
+import RecentIncomeWithChart from "../components/dashboard/recentIncomeChart";
+import IncomeTransactions from "../components/dashboard/recentIncome";
+import Last60DaysIncomes from "../components/dashboard/last60DaysIncome";
 
 export default function Dashboard() {
   useUserAuth();
@@ -76,6 +81,24 @@ export default function Dashboard() {
             totalBalance={dashboardData?. totalBalance || 0}
             totalIncome ={dashboardData?.totalIncome || 0}
             totalExpense={dashboardData?.totalExpense || 0}/>
+
+            <ExpenseTransactions 
+              transactions ={dashboardData?.last30daysExpenses?.transactions || []}
+              onSeeMore={()=> navigate("/expense")}/>
+
+            <Last30DaysExpenses 
+              data ={dashboardData?.last30daysExpenses?.transactions || []} />
+        
+            {/*<RecentIncomeWithChart 
+              data ={dashboardData?.last60DaysIncome?.transactions?.slice(0,5) || []}
+              totalIncome={dashboardData?.totalIncome || 0} />*/}
+             <Last60DaysIncomes 
+              data ={dashboardData?.last60DaysIncome?.transactions || []} />
+
+            <IncomeTransactions
+              transactions ={dashboardData?.last60DaysIncome?.transactions || []}
+              onSeeMore={()=> navigate("/income")} />
+
 
         </div>
       </div>

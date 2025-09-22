@@ -7,6 +7,8 @@ import Friends from "./pages/friends";
 import Login from "./user/login";
 import SignUp from "./user/signup"
 import UserProvider from "./context/userContext";
+import Income from "./pages/income";
+import {Toaster} from "react-hot-toast"
 
 export default function App() {
   return (
@@ -19,11 +21,24 @@ export default function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/expense" element={<Expenses />} />
+            <Route path="/income" element={<Income />} />
             <Route path="/challenges" element={<Challenges />} />
             <Route path="/friends" element={<Friends />} />
           </Routes>
     </Router>
     </div>
+     <Toaster
+     toastOptions={{
+        className: "",
+      style: {
+        background: "#1f2937", // dark gray
+        color: "#f9fafb", // almost white
+        fontSize: "14px",
+        borderRadius: "8px",
+         padding: "10px 16px",
+       },
+      }}/>
+
   </UserProvider>
   );
 };

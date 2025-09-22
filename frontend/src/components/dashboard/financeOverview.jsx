@@ -1,5 +1,5 @@
 import CustomPieChart from "../chart/customPieChart";
-const COLORS =["#875CF5","#FA2C37","#FF6900" ];
+const COLORS =["#4951f5ff","#2cfa3dff","#ff3300ff" ];
 
 export default function FinanceOverview({totalBalance,totalIncome,totalExpense}){
 

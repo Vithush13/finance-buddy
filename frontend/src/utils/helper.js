@@ -1,3 +1,4 @@
+import moment from "moment";
 
 
 export const validateEmail = (email) => {
@@ -28,3 +29,40 @@ export  function addThousandsSeparator(num){
 
      return fractionalPart ? `${formattedInteger}.${fractionalPart}`: formattedInteger;
 };
+
+export function prepareExpenseBarChartData(data=[]){
+  const chartData = data.map((item)=> ({
+    category: item?.category,
+    amount: item?.amount,
+     label: `${moment(item?.date).format("Do MMM")} - ${item?.category || item?.source}`,
+  }))
+   return chartData;
+}
+
+export function prepareincomeBarChartData(data=[]){
+  const chartData = data.map((item)=> ({
+     month: moment(item?.date).format("Do MMM"),
+    source: item?.source,
+    amount: item?.amount,
+    label: `${moment(item?.date).format("Do MMM")} - ${item?.category || item?.source}`,
+  }))
+   return chartData;
+}
+
+
+export function prepareincomeBarChartallData(data = []) {
+  
+  const sortedData = [...data].sort(
+    (a, b) => new Date(a.date) - new Date(b.date)
+  );
+
+  
+  const chartData = sortedData.map((item) => ({
+    month: moment(item?.date).format("Do MMM"), // x-axis label
+    amount: item?.amount,                       // y-axis value
+    source: item?.source,
+    label: `${moment(item?.date).format("Do MMM")} - ${item?.category || item?.source}`,                       // optional
+  }));
+
+  return chartData;
+}

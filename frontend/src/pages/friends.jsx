@@ -115,7 +115,7 @@ export default function Friends() {
     <DashboardLayout activeMenu="Friends">
       <div className="p-6 max-w-6xl mx-auto">
         <h1 className="text-3xl font-bold mb-6 text-purple-700">💰 Group Savings</h1>
-
+        
         <button
           onClick={createGroup}
           className="px-4 py-2 bg-gradient-to-r from-green-500 to-green-700 text-white font-semibold rounded shadow hover:scale-105 transition transform mb-6"

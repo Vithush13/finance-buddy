@@ -14,6 +14,6 @@ A MERN stack web application for tracking personal expenses, AI-powered categori
 ## Tech Stack
 - **Frontend**: React, TailwindCSS, Recharts
 - **Backend**: Node.js, Express.js, MongoDB
-- **AI & APIs**: OpenAI API, Stripe API
-- **Payments**: Stripe API
+- **AI & APIs**: OpenAI API
+
 
