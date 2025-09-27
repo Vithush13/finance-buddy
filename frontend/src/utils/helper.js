@@ -32,9 +32,10 @@ export  function addThousandsSeparator(num){
 
 export function prepareExpenseBarChartData(data=[]){
   const chartData = data.map((item)=> ({
+    month: moment(item?.date).format("Do MMM"),
     category: item?.category,
     amount: item?.amount,
-     label: `${moment(item?.date).format("Do MMM")} - ${item?.category || item?.source}`,
+     label: `${item?.category}`,
   }))
    return chartData;
 }
@@ -44,7 +45,7 @@ export function prepareincomeBarChartData(data=[]){
      month: moment(item?.date).format("Do MMM"),
     source: item?.source,
     amount: item?.amount,
-    label: `${moment(item?.date).format("Do MMM")} - ${item?.category || item?.source}`,
+    label: `${item?.source}`,
   }))
    return chartData;
 }
@@ -61,6 +62,23 @@ export function prepareincomeBarChartallData(data = []) {
     month: moment(item?.date).format("Do MMM"), // x-axis label
     amount: item?.amount,                       // y-axis value
     source: item?.source,
+    label: `${moment(item?.date).format("Do MMM")}`,                       // optional
+  }));
+
+  return chartData;
+}
+
+export function prepareExpenseLineChart(data = []) {
+  
+  const sortedData = [...data].sort(
+    (a, b) => new Date(a.date) - new Date(b.date)
+  );
+
+  
+  const chartData = sortedData.map((item) => ({
+    month: moment(item?.date).format("Do MMM"), // x-axis label
+    amount: item?.amount,                       // y-axis value
+    category: item?.category,
     label: `${moment(item?.date).format("Do MMM")} - ${item?.category || item?.source}`,                       // optional
   }));
 

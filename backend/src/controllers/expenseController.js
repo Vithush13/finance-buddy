@@ -45,9 +45,9 @@ export const downloadExpenseExcel = async (req, res) => {
          const userId = req.user.id;
 
     try{
-        const expense = await Expense.find({ userId}).sort({ date: -1});
+        const expenses = await Expense.find({ userId}).sort({ date: -1});
 
-        const data = income.map((item) => ({
+        const data = expenses.map((item) => ({
             Category: item.category,
             Amount: item.amount,
             Date: item.date,
@@ -55,7 +55,7 @@ export const downloadExpenseExcel = async (req, res) => {
 
         const wb = xlsx.utils.book_new();
         const ws = xlsx.utils.json_to_sheet(data);
-        xlsx.utils.book_append_sheet(wb, ws,"Expense");
+        xlsx.utils.book_append_sheet(wb, ws,"Expenses");
         xlsx.writeFile(wb, "expense_details.xlsx");
         res.download("expense_details.xlsx");
     } catch (error) {

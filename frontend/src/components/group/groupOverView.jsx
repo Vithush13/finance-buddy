@@ -4,16 +4,9 @@ import CustomBarChart from "../card/customBarChart";
 import {LuPlus} from "react-icons/lu"
 
 
-export default function GroupSavingOverview({transactions,onAddIncome}){
+export default function GroupSavingOverview({ onAddGroup }){
 
-    const [chartData,setChartData] = useState([]);
-
-    useEffect(()=>{
-        const result = prepareincomeBarChartallData(transactions);
-        setChartData(result);
-
-        return ()=>{};
-    },[transactions]);
+   
     return(
         <div className=" bg-white p-6 rounded-2xl shadow-md shadow-gray-100 border border-gray-200/50">
             <div className="flex items-center justify-between">
@@ -29,9 +22,7 @@ export default function GroupSavingOverview({transactions,onAddIncome}){
                 </button>
             </div>
 
-            <div className="mt-10">
-                 <CustomBarChart data={chartData}/>
-            </div>
+            
             
           
         </div>  

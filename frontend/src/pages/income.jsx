@@ -86,7 +86,26 @@ export default function Income() {
     }
   };
   
-  const handleDownloadIncome = async ()=>{};
+  const handleDownloadIncome = async ()=>{
+     try{
+      const response = await axiosInstance.get(API_PATHS.INCOME.DOWNLOAD_INCOME,
+              {
+                responseType:"blob",
+              }
+      );
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement("a");
+      link.href= url;
+      link.setAttribute("download","income_details.xlsx");
+      document.body.appendChild(link);
+      link.click();
+      link.parentElement.removeChild(link);
+      window.URL.revokeObjectURL(url);
+    }catch(error){
+      console.log("Error downloading expenses",error);
+      toast.error("Failed to download expense details");
+    }
+  };
 
   useEffect(()=>{
     fetchIncomeDetails();
@@ -105,7 +124,7 @@ export default function Income() {
              <IncomeList transactions ={incomedata}
                onDelete ={(id)=> {
                 setOpenDeleteAlert({show:true, data:id});}}
-                onDownload={handleDownloadIncome}/>
+                OnDownload={handleDownloadIncome}/>
           </div>
         </div>
 
