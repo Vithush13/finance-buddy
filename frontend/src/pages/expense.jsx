@@ -16,6 +16,7 @@ export default function Expenses() {
     const [openAddExpense,setOpenAddExpense] = useState(false);
     const [expensedata,setExpenseData] = useState([]);
     const [loading,setLoading] = useState(false);
+    const [aiInsights, setAiInsights] = useState("");
     const [openDeleteAlert,setOpenDeleteAlert] = useState({
       show:false,
       data:null,
@@ -39,6 +40,16 @@ export default function Expenses() {
       console.error("Something went wrong", error);
     } finally{
       setLoading(false);
+    }
+  };
+
+ const fetchAIInsights = async () => {
+    try {
+      const response = await axiosInstance.get(API_PATHS.EXPENSE.AI_INSIGHTS);
+      setAiInsights(response.data.insights); // Show insights in UI
+    } catch (error) {
+      console.error("Error fetching AI insights:", error.response?.data || error.message);
+      toast.error("Failed to fetch AI insights");
     }
   };
 
@@ -68,6 +79,7 @@ export default function Expenses() {
       setOpenAddExpense(false);
       toast.success("Expense added successfully");
       fetchExpenseDetails();
+      fetchAIInsights();
     }catch(error){
       console.log("Error adding expense", error.response?.data?.message ||error.message);
     }
@@ -110,7 +122,7 @@ export default function Expenses() {
 
    useEffect(()=>{
       fetchExpenseDetails();
-  
+       fetchAIInsights();
       return ()=> {};
     },[])
 
@@ -136,7 +148,11 @@ export default function Expenses() {
                      <DeleteAlert  content="Are you sure Delete expense details?"  onDelete={()=>deleteExpense(openDeleteAlert.data)}/>
                 </Modal>
 
-          
+         <div className="bg-gray-100 p-4 rounded-lg shadow-md mt-6">
+  <h2 className="text-lg font-semibold">💡 AI Expense Insights</h2>
+  <p className="mt-2 whitespace-pre-line">{aiInsights || "Loading AI insights..."}</p>
+</div>
+ 
       </div>
      
     </DashboardLayout>

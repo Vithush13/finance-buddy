@@ -1,5 +1,5 @@
 import express from "express";
-import Group from "../models/friends.js"; 
+import Group from "../models/group.js"; 
 import User from "../models/user.js"; 
 
 

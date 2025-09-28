@@ -19,6 +19,7 @@ export default function AddGroupForm({ onAddGroup }) {
       return;
     }
     onAddGroup(group);
+    onClose();
   };
 
   return (

@@ -41,8 +41,8 @@ export default function SideMenu({activeMenu}){
         </div>
         {SIDE_MENU_DATA.map((item,index) => (
             <button key={`menu_${index}`}
-                    className={`w-full flex items-center gap-4 text-[15px] py-3 px-6 rounded-lg mb-3 ${
-                        activeMenu=== item.label ? "text-white bg-blue-500":"text-gray-700 hover:bg-gray-100"}` } 
+                    className={`w-full flex items-center gap-4 text-[15px] py-3 px-6 rounded-lg mb-3${item.className } ${
+                        activeMenu=== item.label ? "text-white bg-blue-500 ":"text-gray-700 hover:bg-gray-100"}` } 
                           onClick= {()=> handleClick(item.path)}>
                           <item.icon className="text-lg shrink-0" />
                              <span className="leading-none">{item.label}</span>

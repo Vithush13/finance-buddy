@@ -11,6 +11,7 @@ import AddGroupForm from "../components/group/groupForm";
 import GroupList from "../components/group/groupList";
 import { LuUserPlus } from "react-icons/lu";
 
+
 export default function Friends() {
   useUserAuth();
   const { user } = useContext(UserContext);
@@ -55,21 +56,6 @@ export default function Friends() {
     }
   };
 
-   const createGroup = async () => {
-    const name = prompt("Group name?");
-    const goalStr = prompt("Goal amount?");
-    if (!name || !goalStr) return;
-    try {
-      await axios.post(API_PATHS.GROUP.CREATE, {
-        name,
-        goal: parseFloat(goalStr),
-        ownerId: user._id,
-      });
-      fetchGroups();
-    } catch (err) {
-      alert(err.response?.data?.message || "Error creating group");
-    }
-  };
   const editGroup = async (groupId, currentName, currentGoal) => {
     const newName = prompt("Enter new group name:", currentName);
     const newGoal = prompt("Enter new goal amount:", currentGoal);
@@ -81,6 +67,7 @@ export default function Friends() {
       });
       alert("Group updated successfully");
       fetchGroups();
+      
     } catch (err) {
       alert(err.response?.data?.message || "Error updating group");
     }
@@ -92,6 +79,7 @@ export default function Friends() {
       await axios.delete(`${API_PATHS.GROUP.DELETE}/${groupId}`);
       alert("Group deleted successfully");
       fetchGroups();
+      
     } catch (err) {
       alert(err.response?.data?.message || "Error deleting group");
     }
@@ -112,6 +100,7 @@ export default function Friends() {
       await axios.post(API_PATHS.GROUP.ACCEPT(groupId));
       alert("Invitation accepted");
       fetchGroups();
+      onClose();
     } catch (err) {
       alert(err.response?.data?.message || "Error accepting invite");
     }
@@ -122,6 +111,7 @@ export default function Friends() {
       await axios.post(API_PATHS.GROUP.REJECT(groupId));
       alert("Invitation rejected");
       fetchGroups();
+      onClose();
     } catch (err) {
       alert(err.response?.data?.message || "Error rejecting invite");
     }
@@ -134,6 +124,7 @@ export default function Friends() {
       alert("Contribution added successfully");
       setContributionAmounts({ ...contributionAmounts, [groupId]: "" });
       fetchGroups();
+      onClose();
     } catch (err) {
       alert(err.response?.data?.message || "Error adding contribution");
     }
@@ -218,103 +209,6 @@ export default function Friends() {
               
             </div>
       
-      <div className="p-6 max-w-6xl mx-auto">
-        
-    
-
-        <div className="grid md:grid-cols-2 gap-6">
-          {/* Groups List */}
-          <div>
-            <h2 className="text-xl font-semibold mb-4 text-indigo-600">Your Groups / Invitations</h2>
-            {groups.map((g) => (
-              <div
-                key={g._id}
-                className={`p-4 border rounded-xl shadow-md mb-4 cursor-pointer transition transform hover:scale-105 ${
-                  selectedGroupId === g._id ? "bg-indigo-100 border-blue-300" : "bg-white border-none"
-                }`}
-                onClick={() => setSelectedGroupId(g._id)}
-              >
-                <h3 className="text-lg font-bold text-gray-800">{g.name}</h3>
-                <div className="text-sm text-gray-600">Owner: {g.owner?.name}</div>
-                <div className="text-sm text-gray-600">Members: {g.members?.length || 0}</div>
-                <div className="text-sm font-semibold text-gray-700">
-                  Goal: Rs.{g.goal} | Saved: Rs.{g.totalSavings || 0}
-                </div>
-
-                {/* Edit/Delete (Owner Only) */}
-                {user?._id === g.owner?._id && (
-                  <div className="mt-3 flex space-x-2">
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        editGroup(g._id, g.name, g.goal);
-                      }}
-                      className="px-3 py-1 bg-yellow-400 text-white rounded-lg hover:bg-yellow-500 transition"
-                    >
-                      Edit
-                    </button>
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        deleteGroup(g._id);
-                      }}
-                      className="px-3 py-1 bg-red-500 text-white rounded-lg hover:bg-red-600 transition"
-                    >
-                      Delete
-                    </button>
-                  </div>
-                )}
-
-                {/* Accept/Reject Invite */}
-                {g.invitations?.some(
-                  (inv) => inv.user._id === user?._id && inv.status === "pending"
-                ) && (
-                  <div className="mt-3 flex space-x-2">
-                    <button
-                      onClick={() => acceptInvite(g._id)}
-                      className="px-3 py-1 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition"
-                    >
-                      Accept
-                    </button>
-                    <button
-                      onClick={() => rejectInvite(g._id)}
-                      className="px-3 py-1 bg-red-300 text-white rounded-lg hover:bg-red-400 transition"
-                    >
-                      Reject
-                    </button>
-                  </div>
-                )}
-
-                {/* Contribute for Members */}
-                {g.members?.some((m) => m.user._id === user._id) && (
-                  <div className="mt-3 flex items-center space-x-2">
-                    <input
-                      type="number"
-                      placeholder="Add saving"
-                      value={contributionAmounts[g._id] || ""}
-                      onChange={(e) =>
-                        setContributionAmounts({
-                          ...contributionAmounts,
-                          [g._id]: e.target.value,
-                        })
-                      }
-                      className="p-2 border rounded-lg flex-1"
-                    />
-                    <button
-                      onClick={() => contribute(g._id, contributionAmounts[g._id])}
-                      className="px-3 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition"
-                    >
-                      Contribute
-                    </button>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-
-          
-        </div>
-      </div> 
     </DashboardLayout>
   );
 }

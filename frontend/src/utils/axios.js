@@ -3,7 +3,7 @@ import { BACKEND_URL } from "./apiPath";
 
 const axiosInstance = axios.create({
     baseURL: BACKEND_URL,
-    timeout:10000,
+    timeout:0,
     headers: {
         "Content-Type": "application/json",
         Accept: "application/json",

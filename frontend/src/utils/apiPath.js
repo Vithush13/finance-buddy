@@ -20,6 +20,7 @@ export const API_PATHS = {
         GET_ALL_EXPENSE: "api/v1/expense/getExpense",
         DELETE_EXPENSE: (expenseId)=> `api/v1/expense/${expenseId}`,
         DOWNLOAD_EXPENSE: "api/v1/expense/download",
+        AI_INSIGHTS: "api/v1/expense/ai-insights",
     },
     IMAGE: {
         UPLOAD_IMAGE: "api/v1/auth/upload-image",  

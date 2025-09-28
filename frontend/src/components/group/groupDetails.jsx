@@ -56,7 +56,7 @@ const foundUser = users.find(u => u.email.toLowerCase() === searchQuery.toLowerC
 
     await onContribute(group._id, parseFloat(contributionAmount));
     setContributionAmount("");
-    
+    onClose();
   };
 
   const handleAccept = async () => {
