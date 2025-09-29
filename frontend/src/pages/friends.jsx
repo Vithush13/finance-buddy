@@ -160,7 +160,7 @@ export default function Friends() {
         if (!searchQuery) return alert("Enter an email");
         try {
           const res = await axios.get(
-            `/api/v1/users/search?q=${encodeURIComponent(searchQuery)}`
+            `/api/v1/groups/search?q=${encodeURIComponent(searchQuery)}`
           );
           const foundUser = res.data.find((u) => u.email === searchQuery);
           if (!foundUser) return alert("User not found");

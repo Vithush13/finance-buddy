@@ -23,7 +23,7 @@ export default function GroupDetailModal({
     if (!searchQuery) return alert("Enter an email");
 
     try {
-      const res = await axios.get(`/api/v1/users/search?q=${encodeURIComponent(searchQuery)}`);
+      const res = await axios.get(`/api/v1/groups/search?q=${encodeURIComponent(searchQuery)}`);
         console.log("Search query:", searchQuery);
        console.log("API response:", res.data);
        const users = Array.isArray(res.data)

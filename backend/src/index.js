@@ -10,7 +10,6 @@ import incomeRoutes from "./routes/incomeRoutes.js";
 import expenseRoutes from "./routes/expenseRoutes.js";
 import dashboardRoutes from "./routes/dashboardRoutes.js";
 import groupRoutes from "./routes/groupRoutes.js";
-import userRoutes from"./routes/users.js"
 import { Server } from "socket.io";
 
 dotenv.config(); 
@@ -38,7 +37,7 @@ app.use("/api/v1/income", incomeRoutes);
 app.use("/api/v1/expense", expenseRoutes);
 app.use("/api/v1/dashboard", dashboardRoutes);
 app.use("/api/v1/groups", groupRoutes);
-app.use("/api/v1/users", userRoutes);
+
 
 // ✅ Create HTTP server for Socket.IO
 const server = http.createServer(app);
@@ -55,7 +54,8 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/uploads',express.static(path.join(__dirname,"uploads")));
+app.use('/uploads', express.static(path.join(__dirname, "../uploads")));
+
 app.get("/", (req, res) => {
   res.send("Backend is running...");
 });

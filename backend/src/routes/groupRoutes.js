@@ -147,14 +147,18 @@ router.post("/:groupId/reject", protect, async (req, res) => {
 });
 
 // Search users
-router.get("/search", protect, async (req, res) => {
+router.get("/search", async (req, res) => {
   try {
     const { q } = req.query;
     if (!q) return res.json([]);
 
+    // Search by name or email (case-insensitive)
     const users = await User.find({
-      $or: [{ name: { $regex: q, $options: "i" } }, { email: { $regex: q, $options: "i" } }],
-    }).select("_id name email");
+      $or: [
+        { name: { $regex: q, $options: "i" } },
+        { email: { $regex: q, $options: "i" } },
+      ],
+    }).select("_id name email"); // only return required fields
 
     res.json(users);
   } catch (err) {
